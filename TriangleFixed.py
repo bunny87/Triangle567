@@ -47,6 +47,8 @@ def classifyTriangle(a, b, c):
     # of the specified shape is not a triangle
     # if (a > (b - c)) or (b > (c - a)) or (c > (a - b)):
     #     return 'NotATriangle'
+    if (a < (b - c)) or (b < (c - a)) or (c < (a - b)):
+        return 'NotATriangle'
 
     # now we know that we have a valid triangle
     if a == b == c:
