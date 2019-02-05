@@ -21,29 +21,35 @@ from TriangleFixed import classifyTriangle
 class TestTriangles(unittest.TestCase):
     # define multiple sets of tests as functions with names that begin
 
-    def testRightTriangleA(self):
+    def testRightTriangle(self):
         self.assertEqual(classifyTriangle(3, 4, 5), 'Right', '3, 4, 5 is a Right triangle')
 
-    def testRightTriangleB(self):
+    def testScaleneTriangle(self):
         self.assertEqual(classifyTriangle(5, 3, 4), 'Scalene', '5, 3, 4 is a Scalene triangle')
 
     def testEquilateralTriangles(self):
-        self.assertEqual(classifyTriangle(1, 1, 1), 'Equilateral', '1, 1, 1 should be equilateral')
-
-    def testScaleneTriangle(self):
-        self.assertEqual(classifyTriangle(4, 5, 6), 'Scalene', '4, 5, 6 is a Scalene triangle')
+        self.assertEqual(classifyTriangle(1, 1, 1), 'Equilateral', '1, 1, 1 is an Equilateral triangle')
 
     def testIsocelesTriangle(self):
         self.assertEqual(classifyTriangle(3, 5, 5), 'Isoceles', '3, 5, 5 is a Isoceles triangle')
 
-    def testSidesOfTriangleA(self):
+    def testNotATriangleA(self):
+        self.assertEqual(classifyTriangle(4, 2, 1), 'NotATriangle', '4, 2, 1 is not a triangle according to a > b + c')
+
+    def testNotATriangleB(self):
+        self.assertEqual(classifyTriangle(2, 7, 3), 'NotATriangle', '2, 7, 3 is not a triangle according to b > a + c')
+
+    def testNotATriangleC(self):
+        self.assertEqual(classifyTriangle(3, 2, 9), 'NotATriangle', '3, 2, 9 is not a triangle according to c > a + b')
+
+    def testMaxSidesTriangle(self):
         self.assertEqual(classifyTriangle(204, 2010, 201), 'InvalidInput', 'Checking for maximum boundary values')
 
-    def testSidesOfTriangleB(self):
+    def testMinSidesTriangle(self):
         self.assertEqual(classifyTriangle(0, 0, 0), 'InvalidInput', 'Checking for minimum boundary values')
 
-    def testNotATriangleProperty(self):
-        self.assertEqual(classifyTriangle(5, 4, 7), 'Scalene', '5, 4, 7 is a Scalene triangle')
+    def testInvalidSidesTriangle(self):
+        self.assertEqual(classifyTriangle('3', 2, 5), 'InvalidInput', 'Checking for invalid value types')
 
 if __name__ == '__main__':
     print('Running unit tests')

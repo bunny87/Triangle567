@@ -29,16 +29,19 @@ def classifyTriangle(a, b, c):
       BEWARE: there may be a bug or two in this code
     """
 
+    # verify that all 3 inputs are integers
+    # Python's "isinstance(object,type) returns True if the object is of the specified type
+    # updated position of isInstance block so as this block runs first to check if,
+    # accepted type of value is provided, i.e. integer
+    if not(isinstance(a, int) and isinstance(b, int) and isinstance(c, int)):
+        return 'InvalidInput'
+
     # require that the input values be >= 0 and <= 200
     if a > 200 or b > 200 or c > 200:
         return 'InvalidInput'
 
+    # updated condition "b <= b" to "b <= 0", as side should be checked against 0 not itself
     if a <= 0 or b <= 0 or c <= 0:
-        return 'InvalidInput'
-
-    # verify that all 3 inputs are integers
-    # Python's "isinstance(object,type) returns True if the object is of the specified type
-    if not(isinstance(a, int) and isinstance(b, int) and isinstance(c, int)):
         return 'InvalidInput'
 
     # This information was not in the requirements spec but
@@ -47,14 +50,21 @@ def classifyTriangle(a, b, c):
     # of the specified shape is not a triangle
     # if (a > (b - c)) or (b > (c - a)) or (c > (a - b)):
     #     return 'NotATriangle'
-    if (a < (b - c)) or (b < (c - a)) or (c < (a - b)):
+    # updated first two conditions as per above comment for this block 
+    if a > b + c or b > c + a or c > a + b:
         return 'NotATriangle'
 
     # now we know that we have a valid triangle
+    # updated this condition to check if all three sides are equal to check if the triangle is equilateral
     if a == b == c:
         return 'Equilateral'
+
+    # previously sides were multiplied by 2 which is not the condition,
+    # correct condition is: (c * c) == (a ** a) + (b ** b)
     elif ((a ** 2) + (b ** 2)) == (c ** 2):
         return 'Right'
+
+    # updated this condition so as to check if "a != c"
     elif (a != b) and  (b != c) and (a != c):
         return 'Scalene'
     else:
